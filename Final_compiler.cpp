@@ -40,7 +40,6 @@ int modFunc(int x, int y) {
 bool isNumeric(const string& s) {
     if (s.empty()) return false;
     size_t start = (s[0] == '-') ? 1 : 0;
-    // Reject "-" or strings like "--5"
     if (start == 1 && s.size() == 1) return false;
     for (size_t i = start; i < s.size(); i++) {
         if (!isdigit(s[i])) return false;
@@ -84,12 +83,11 @@ int processCommand(const vector<string>& lines, size_t currentLine) {
     if (tokens.empty()) return currentLine + 1;
 
     try {
-        // Skip lines that are label definitions (already processed)
+       
         if (tokens.size() == 1 && tokens[0][0] == '@') {
             return currentLine + 1;
         }
 
-        // Handle unconditional jumps
         if (tokens.size() >= 2 && tokens[1] == "jump") {
             if (labelStore.find(tokens[0]) == labelStore.end()) {
                 throw runtime_error("Undefined label: " + tokens[0]);
@@ -97,7 +95,6 @@ int processCommand(const vector<string>& lines, size_t currentLine) {
             return labelStore[tokens[0]];
         }
 
-        // Handle conditional jumps
         if (tokens.size() >= 4 && (
             tokens[3] == "jump_if_equal" ||
             tokens[3] == "jump_if_greater" ||
@@ -120,7 +117,6 @@ int processCommand(const vector<string>& lines, size_t currentLine) {
             return conditionMet ? labelStore[tokens[0]] : currentLine + 1;
         }
 
-        // Handle variable assignments and operations
         if (tokens.size() == 2) {
             if (tokens[1] == "print") {
                 if (tokens[0][0] == '$') display(varStore[tokens[0]]);
@@ -160,10 +156,8 @@ int main() {
     while (getline(inputFile, line)) lines.push_back(line);
     inputFile.close();
 
-    // First pass: collect all labels
     gatherLabels(lines);
 
-    // Second pass: execute code
     for (size_t i = 0; i < lines.size();) {
         i = processCommand(lines, i);
     }
