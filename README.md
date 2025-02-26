@@ -1,5 +1,3 @@
-# -ScriptoX
- ScriptoX – A lightweight and efficient interpreter for a simple scripting language. Supports mathematical operations, variables, labels, and conditional jumps.
 
 
 <head>
@@ -18,6 +16,9 @@
     </style>
 </head>
 <body>
+# -ScriptoX
+ ScriptoX – A lightweight and efficient interpreter for a simple scripting language. Supports mathematical operations, variables, labels, and conditional jumps.
+
     <h1>Simple C++ Compiler</h1>
     <p>This project is a simple compiler written in C++ that reads commands from a <code>testCase.txt</code> file and executes them.</p>
     
