@@ -1,0 +1,6 @@
+5 -> $num;
+6 -> $num2;
+$num, $num2 -> add -> $result;
+$result -> print;
+exit;
+$num2 -> increase;
